@@ -21,10 +21,12 @@ export default function Header() {
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Open main menu</span>
-            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+            <Bars3Icon className={`h-6 w-6 ${mobileMenuOpen ? 'hidden' : ''}`} aria-hidden="true" />
+            <XMarkIcon className={`h-6 w-6 ${mobileMenuOpen ? '' : 'hidden'}`} aria-hidden="true" />
+
+            {/* <Bars3Icon className="h-6 w-6" aria-hidden="true" /> */}
           </button>
         </div>
-        <div >
         {location.pathname === '/login' ? 
         <div className="hidden lg:flex lg:gap-x-4 items-center">
               <p className='text-[#606060] text-sm'>New to Xpress Rewards?</p>
@@ -37,7 +39,6 @@ export default function Header() {
 
               }
              
-        </div>
       </nav>
       
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -54,7 +55,7 @@ export default function Header() {
             </a>
             <button
               type="button"
-              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+              className="-m-2.5 rounded-md p-2.5 text-gray-700 "
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="sr-only">Close menu</span>

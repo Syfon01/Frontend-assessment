@@ -1,4 +1,6 @@
 import { Routes, Route, Outlet, Link,  Navigate } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Login from "./pages/Auth/login"
 import Register from "./pages/Auth/register"
 
@@ -21,6 +23,8 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
     </Routes>
+
+    <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
   </div>
 );
 }
