@@ -1,0 +1,27 @@
+.p-paginator .p-paginator-first{
+  margin-left: auto!important;
+}
+.p-datatable .p-datatable-tbody > tr > td{
+  font-size: 14px;
+  color: "#1A1619";
+  padding: 0.5rem 1rem;
+}
+.p-datatable .p-datatable-header{
+  /* background: transparent; */
+  background:#F5F6F8;
+  border: none;
+  padding: 1rem 0;
+}
+.p-datatable .p-datatable-thead > tr > th{
+  font-size: 14px;
+  color: "#1A1619";
+  background-color: white;
+}
+.p-button{
+  font-size: 14px;
+  padding: 0.75rem;
+}
+.p-inputtext{
+  border: none;
+  padding: 0.85rem 0.75rem;
+}

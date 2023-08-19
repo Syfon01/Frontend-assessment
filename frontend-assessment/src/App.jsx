@@ -5,7 +5,7 @@ import DashboardLayout from "./components/Layout/DashboardLayout";
 import Login from "./pages/Auth/login"
 import Register from "./pages/Auth/register"
 import Dashboard from "./pages/Dashboard/index"
-
+import "./App.css"
 export default function App() {
   const registrationData = JSON.parse(localStorage.getItem('registrationData'));
 
@@ -17,6 +17,7 @@ export default function App() {
         <Route path="/" element={<Navigate to="/login" replace />} />
       ) : (
         <Route path="/" element={<DashboardLayout />}>
+          <Route index element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<NoMatch />} />
         </Route>
