@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link,useNavigate} from 'react-router-dom';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
+import { useAuth, authenticateUser } from './SessionManager'; // Use the new useAuth hook
+import { useMutation, useQueryClient } from 'react-query'; // Import useMutation and useQueryClient
 import { toast } from 'react-toastify';
+
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const { login } = useAuth(); // Use the login function from the session context
+  const queryClient = useQueryClient(); // Initialize queryClient
   const navigate = useNavigate();
 
   const toggleShowPassword = () => {
@@ -17,32 +22,34 @@ const LoginForm = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const loginMutation = useMutation(authenticateUser, {
+    onSuccess: (data) => {
+      // Store user data in React Query cache and localStorage
+      queryClient.setQueryData('user', data);
+      console.log(data)
+      toast.success('Login successful! Redirecting to the dashboard...');
+
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 2000);
+    },
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Retrieve registration data from localStorage
     const registrationData = JSON.parse(localStorage.getItem('registrationData'));
-
+    // console.log(registrationData); 
     if (registrationData) {
-      console.log(registrationData)
-      console.log(formData)
-      // Check if the provided email and password match the registration data
-
-      if (
-        formData.email === registrationData.contactEmail &&
-        formData.password === registrationData.password
-
-      ) {
-        navigate('/dashboard');
-
-        toast.success('Login successful!');
-      } else {
-        toast.error('Invalid email or password. Please try again.');
-      }
+      // Use the loginMutation function
+      loginMutation.mutate({ formData, registrationData });
     } else {
       toast.error('No registration data found. Please register first.');
     }
   };
+
+  
 
   return (
     <>

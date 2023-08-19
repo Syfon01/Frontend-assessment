@@ -197,9 +197,16 @@ const RegisterForm = () => {
                             onChange={handleInputChange}
                             className="form-select"
                           >
-                            <option>United States</option>
-                            <option>Canada</option>
-                            <option>Mexico</option>
+                            <option>Abia</option>
+                            <option>Adamawa</option>
+                            <option>Akwa Ibom</option>
+                            <option>Rivers</option>
+                            <option>kano</option>
+                            <option>Lagos</option>
+                            <option>Ekiti</option>
+                            <option>Osun</option>
+                            <option>Ogun</option>
+                            <option>Abuja</option>
                           </select>
                         </div>
                       </div>

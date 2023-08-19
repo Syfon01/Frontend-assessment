@@ -8,6 +8,9 @@ import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import allData from "../../components/data/verifyData";
+import { fetchUserData } from '../../components/AuthForms/SessionManager';
+import { useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
 
 const index = () => {
   const [selectedData, setSelectedData] = useState([]);
@@ -17,6 +20,9 @@ const index = () => {
   const [rows, setRows] = useState(10);
   const [selectedTable, setSelectedTable] = useState("All");
 
+  const { data: userData, isLoading, isError, error } = useQuery('userData', fetchUserData);
+
+console.log(userData?.user)
   const addData = () => {
     console.log("click")
   };
@@ -141,6 +147,9 @@ const index = () => {
 
   return (
     <div>
+
+      <p className="text-xl">Welcome, {userData?.user?.contactName} </p>
+
       <div className="bg-white rounded">
         <DataTable
           value={data}
