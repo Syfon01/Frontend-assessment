@@ -26,7 +26,6 @@ const LoginForm = () => {
     onSuccess: (data) => {
       // Store user data in React Query cache and localStorage
       queryClient.setQueryData('user', data);
-      console.log(data)
       toast.success('Login successful! Redirecting to the dashboard...');
 
       setTimeout(() => {

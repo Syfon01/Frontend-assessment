@@ -20,9 +20,9 @@ const index = () => {
   const [rows, setRows] = useState(10);
   const [selectedTable, setSelectedTable] = useState("All");
 
-  const { data: userData, isLoading, isError, error } = useQuery('userData', fetchUserData);
+  const { data: userData } = useQuery('userData', fetchUserData);
 
-console.log(userData?.user)
+// console.log(userData?.user)
   const addData = () => {
     console.log("click")
   };

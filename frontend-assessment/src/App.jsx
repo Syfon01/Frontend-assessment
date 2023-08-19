@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,7 +13,16 @@ import './App.css';
 const queryClient = new QueryClient();
 
 export default function App() {
-  const isAuthenticated = isUserAuthenticated();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      const authenticated = await isUserAuthenticated();
+      setIsAuthenticated(authenticated);
+    };
+
+    checkAuthentication();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}> 

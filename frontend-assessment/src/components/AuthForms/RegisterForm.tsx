@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FileUpload from "../UI/FileUpload";
 import toast, { Toaster } from "react-hot-toast";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 
 const RegisterForm = () => {
   const [step, setStep] = useState(1);
@@ -25,6 +26,16 @@ const RegisterForm = () => {
     confirmPassword: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -35,11 +46,15 @@ const RegisterForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Passwords do not match.");
+      return;
+    }
     // Save registration data to localStorage
-    localStorage.setItem('registrationData', JSON.stringify(formData));
+    localStorage.setItem("registrationData", JSON.stringify(formData));
+    toast.success("Your registration was successfully");
 
-    navigate('/login');
+    navigate("/login");
   };
 
   return (
@@ -230,10 +245,7 @@ const RegisterForm = () => {
                       </div>
 
                       <div className="sm:col-span-6">
-                        <label
-                          htmlFor="contactPhone"
-                          className="form-label"
-                        >
+                        <label htmlFor="contactPhone" className="form-label">
                           Contact Phone Number
                         </label>
                         <div className="mt-2">
@@ -249,10 +261,7 @@ const RegisterForm = () => {
                       </div>
 
                       <div className="sm:col-span-6">
-                        <label
-                          htmlFor="contactEmail"
-                          className="form-label"
-                        >
+                        <label htmlFor="contactEmail" className="form-label">
                           Contact Email Address
                         </label>
                         <div className="mt-2">
@@ -276,31 +285,59 @@ const RegisterForm = () => {
                     <div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                       <div className="sm:col-span-6">
                         <label className="form-label">Password</label>
-                        <input
-                          type="password"
-                          name="password"
-                          value={formData.password}
-                          onChange={handleInputChange}
-                          className="form-input"
-                        />
+                        <div className="flex">
+                          <input
+                            id="password"
+                            name="password"
+                            type={showPassword ? "text" : "password"}
+                            autoComplete="current-password"
+                            required
+                            className="password-control"
+                            onChange={handleInputChange}
+                            value={formData.password}
+                          />
+                          <button
+                            type="button"
+                            onClick={toggleShowPassword}
+                            className="password-button"
+                          >
+                            {showPassword ? (
+                              <EyeSlashIcon className="h-5 w-5 text-gray-700" />
+                            ) : (
+                              <EyeIcon className="h-5 w-5 text-gray-700" />
+                            )}
+                          </button>
+                        </div>
                       </div>
 
                       <div className="sm:col-span-6">
-                        <label
-                          htmlFor="confirmPassword"
-                          className="form-label"
-                        >
+                        <label htmlFor="confirmPassword" className="form-label">
                           Confirm Password
                         </label>
                         <div className="mt-2">
-                          <input
-                            type="password"
-                            name="confirmPassword"
-                            id="confirmPassword"
-                            value={formData.confirmPassword}
-                            onChange={handleInputChange}
-                            className="form-input"
-                          />
+                          <div className="flex">
+                            <input
+                              name="confirmPassword"
+                              id="confirmPassword"
+                              type={showConfirmPassword ? "text" : "password"}
+                              autoComplete="current-password"
+                              required
+                              className="password-control"
+                              onChange={handleInputChange}
+                              value={formData.confirmPassword}
+                            />
+                            <button
+                              type="button"
+                              onClick={toggleShowConfirmPassword}
+                              className="password-button"
+                            >
+                              {showConfirmPassword ? (
+                                <EyeSlashIcon className="h-5 w-5 text-gray-700" />
+                              ) : (
+                                <EyeIcon className="h-5 w-5 text-gray-700" />
+                              )}
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>

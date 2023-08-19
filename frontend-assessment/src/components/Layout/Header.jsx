@@ -6,24 +6,27 @@ import {
   BellIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+import { Link,useNavigate} from 'react-router-dom';
+import { logoutUser } from '../../components/AuthForms/SessionManager';
 
 const userNavigation = [
   { name: 'Your profile', href: '/profile' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Sign out' },
 ]
 
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-// import { useSession } from '../../components/AuthForms/SessionManager';
 
-const handleLogout = () => {
-  // logout(); // Call the logout function from the session context
-};
 
 const Header = ({handleOpen}) => {
-  // const { session, logout } = useSession(); 
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logoutUser()
+    navigate('/login');
+  };
+  
 
   return (
     <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
@@ -95,7 +98,7 @@ const Header = ({handleOpen}) => {
                               href={item.href}
                               className={classNames(
                                 active ? 'bg-gray-50' : '',
-                                'block px-3 py-1 text-sm leading-6 text-gray-900'
+                                'block px-3 py-1 text-sm leading-6 text-gray-900 cursor-pointer'
                               )}
                               onClick={item.name === 'Sign out' ? handleLogout : undefined}
                     >
