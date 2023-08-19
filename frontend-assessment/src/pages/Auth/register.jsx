@@ -1,6 +1,6 @@
 import React from 'react'
 import AuthHeader from "../../components/Layout/AuthHeader"
-import RegisterForm from '../../components/Layout/RegisterForm'
+import RegisterForm from '../../components/AuthForms/RegisterForm'
 const register = () => {
   return (
     <>

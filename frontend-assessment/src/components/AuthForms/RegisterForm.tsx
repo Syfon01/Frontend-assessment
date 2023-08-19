@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FileUpload from "./Layout/FileUpload";
+import FileUpload from "../UI/FileUpload";
 import toast, { Toaster } from "react-hot-toast";
 
 const RegisterForm = () => {
