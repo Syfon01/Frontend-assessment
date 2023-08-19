@@ -14,6 +14,12 @@ export async function setUserData(data) {
   localStorage.setItem('userData', JSON.stringify(data));
 }
 
+export function isUserAuthenticated() {
+  const userData = localStorage.getItem('userData');
+  return !!userData; // Returns true if user data exists, false otherwise
+}
+
+
 // Function to remove user data from localStorage
 async function removeUserData() {
   localStorage.removeItem('userData');
@@ -45,6 +51,8 @@ export async function authenticateUser(formData, registrationData) {
 export async function logoutUser() {
   removeUserData();
 }
+
+
 
 // Custom hook for user authentication
 export function useAuth() {

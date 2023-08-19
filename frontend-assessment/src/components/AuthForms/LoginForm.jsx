@@ -30,7 +30,7 @@ const LoginForm = () => {
       toast.success('Login successful! Redirecting to the dashboard...');
 
       setTimeout(() => {
-        navigate('/dashboard');
+        navigate('/');
       }, 2000);
     },
   });

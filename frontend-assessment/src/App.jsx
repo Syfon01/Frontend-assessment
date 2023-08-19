@@ -1,5 +1,3 @@
-// App.js
-
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -8,23 +6,25 @@ import DashboardLayout from './components/Layout/DashboardLayout';
 import Login from './pages/Auth/login';
 import Register from './pages/Auth/register';
 import Dashboard from './pages/Dashboard/index';
-import { QueryClient, QueryClientProvider } from 'react-query'; // Import React Query
+import { QueryClient, QueryClientProvider } from 'react-query'; 
+import { isUserAuthenticated } from './components/AuthForms/SessionManager'; 
 import './App.css';
 
 const queryClient = new QueryClient();
 
 export default function App() {
+  const isAuthenticated = isUserAuthenticated();
+
   return (
-    <QueryClientProvider client={queryClient}> {/* Wrap your app with QueryClientProvider */}
+    <QueryClientProvider client={queryClient}> 
       <div>
         <Routes>
           <Route 
             path="/"
-            element={<Navigate to="/login" replace />}
-          />
-          <Route path="/" element={<DashboardLayout />}>
+            element={isAuthenticated ? <DashboardLayout /> : <Navigate to="/login" replace />}
+          >
             <Route index element={<Dashboard />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            {/* <Route path="/dashboard" element={<Dashboard />} /> */}
             <Route path="*" element={<NoMatch />} />
           </Route>
           <Route path="/login" element={<Login />} />
