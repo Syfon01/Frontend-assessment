@@ -1,6 +1,6 @@
 import React from "react";
-import uploadIcon from "../../../assets/images/upload.svg";
-import exportBtn from "../../../assets/images/export-btn.svg";
+import uploadIcon from "../../assets/images/upload.svg";
+import exportBtn from "../../assets/images/export-btn.svg";
 const FileUpload = () => {
   return (
     <div className="mt-2 flex justify-center rounded-[4px] border border-dashed border-gray-900/25 p-6 ">
