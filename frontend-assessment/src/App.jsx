@@ -25,7 +25,6 @@ export default function App() {
   }, []);
 
   if (isAuthenticated === null) {
-    // Authentication status is being checked, show loading or nothing
     return null;
   }
 
