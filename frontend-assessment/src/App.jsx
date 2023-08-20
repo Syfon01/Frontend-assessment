@@ -13,7 +13,7 @@ import './App.css';
 const queryClient = new QueryClient();
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
 
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -23,6 +23,11 @@ export default function App() {
 
     checkAuthentication();
   }, []);
+
+  if (isAuthenticated === null) {
+    // Authentication status is being checked, show loading or nothing
+    return null;
+  }
 
   return (
     <QueryClientProvider client={queryClient}> 
@@ -48,7 +53,9 @@ export default function App() {
 function NoMatch() {
   return (
     <div>
-      <h2>Nothing to see here!</h2>
+      <p className='text-lg'>Nothing to see here!</p>
+      <p>Just a friendly display. You can logout or stay on the homepage</p>
+
     </div>
   );
 }
